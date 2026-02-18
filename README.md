@@ -45,8 +45,6 @@ C:\ProgramData\ZeroTrace\Logs
 |----------------|------------|
 | SCAN-ONLY      | Displays what would be removed (no changes made) |
 | LIVE CLEAN     | Removes detected targets after confirmation |
-| RESTORE POINT  | Creates a system restore point before cleanup |
-| SKIP UNINSTALL | Performs residual-only cleanup |
 
 ---
 
