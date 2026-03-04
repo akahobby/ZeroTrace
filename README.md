@@ -61,10 +61,8 @@ The application is implemented as a .NET 8 WPF desktop app and can be published 
   - Logs every deletion attempt (including skipped, unsafe targets).
 - **Logging**:
   - Each run creates a timestamped log file under `%ProgramData%\ZeroTrace\Logs`.
-  - All log messages are also streamed into the collapsible log panel in the UI.
-- **Elevation support**:
-  - Runs normally without administrative rights.
-  - Provides a **Restart as Administrator** option that relaunches ZeroTrace elevated via UAC.
+- **Elevation**:
+  - The app runs with administrator rights by default (required for uninstall and leftover operations).
 
 ---
 
@@ -120,7 +118,7 @@ All candidates are presented to the user in a dedicated leftover dialog before a
 
 - **Projects**
   - `ZeroTrace.Core` – logic engine (enumeration, Steam detection, uninstall coordination, leftover scanning, deletion, logging)
-  - `ZeroTrace.App` – WPF UI (application list, details, uninstall flow, log panel, leftover dialog)
+  - `ZeroTrace.App` – WPF UI (application list, details, uninstall flow, leftover dialog)
 
 - **Build the solution**
 
@@ -157,7 +155,7 @@ At runtime, ZeroTrace writes logs to:
 
 - `%ProgramData%\ZeroTrace\Logs\ZeroTrace_YYYYMMDD_HHMMSS.log`
 
-These log files mirror the messages shown in the in‑app log panel and are useful for auditing operations or troubleshooting.
+These log files are useful for auditing operations or troubleshooting.
 
 ---
 
