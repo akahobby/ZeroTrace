@@ -1,0 +1,153 @@
+<Window x:Class="ZeroTrace.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="ZeroTrace"
+        Height="500"
+        Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource ZTWindowBackground}">
+    <Grid Margin="8"
+          Background="{StaticResource ZTWindowBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Search -->
+        <DockPanel Grid.Row="0"
+                   Margin="0 0 0 8"
+                   Background="{StaticResource ZTControlBackground}">
+            <TextBlock Text="Search:"
+                       VerticalAlignment="Center"
+                       Margin="0 0 4 0" />
+            <TextBox Width="260"
+                     Margin="0 0 8 0"
+                     VerticalAlignment="Center"
+                     Background="{StaticResource ZTControlBackground}"
+                     Foreground="{StaticResource ZTForeground}"
+                     BorderBrush="{StaticResource ZTBorderBrush}"
+                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+        </DockPanel>
+
+        <!-- Main layout -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.5*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Applications list -->
+            <Border Grid.Column="0"
+                    BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
+                    BorderThickness="1">
+                <ListView x:Name="ApplicationsList"
+                          ItemsSource="{Binding ApplicationsView}"
+                          SelectedItem="{Binding SelectedApplication, Mode=TwoWay}"
+                          Margin="0"
+                          IsSynchronizedWithCurrentItem="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel Margin="4">
+                                <Image Width="24"
+                                       Height="24"
+                                       Margin="0 0 8 0"
+                                       Source="{Binding Icon}" />
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}"
+                                               FontWeight="Bold" />
+                                    <StackPanel Orientation="Horizontal" Margin="0 2 0 0">
+                                        <TextBlock Text="{Binding Publisher}" />
+                                        <TextBlock Text="  " />
+                                        <TextBlock Text="{Binding Version}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
+
+            <!-- Details + actions -->
+            <Border Grid.Column="1"
+                    Margin="8 0 0 0"
+                    BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
+                    BorderThickness="1">
+                <Grid Margin="8"
+                      Visibility="{Binding SelectedApplication, Converter={StaticResource NullToVisibilityConverter}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               FontSize="16"
+                               FontWeight="Bold"
+                               Text="{Binding SelectedApplication.Name}" />
+
+                    <StackPanel Grid.Row="1"
+                                Orientation="Horizontal"
+                                Margin="0 8 0 0">
+                        <TextBlock Text="Publisher:" FontWeight="Bold" Width="90" />
+                        <TextBlock Text="{Binding SelectedApplication.Publisher}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2"
+                                Orientation="Horizontal"
+                                Margin="0 4 0 0">
+                        <TextBlock Text="Version:" FontWeight="Bold" Width="90" />
+                        <TextBlock Text="{Binding SelectedApplication.Version}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3"
+                                Orientation="Horizontal"
+                                Margin="0 4 0 0">
+                        <TextBlock Text="Install location:" FontWeight="Bold" Width="90" />
+                        <TextBlock Text="{Binding SelectedApplication.InstallLocation}"
+                                   TextWrapping="Wrap"
+                                   Width="Auto" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4"
+                                Orientation="Horizontal"
+                                Margin="0 4 0 0">
+                        <TextBlock Text="Installed:" FontWeight="Bold" Width="90" />
+                        <TextBlock Text="{Binding SelectedApplication.DisplayInstallDate}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5"
+                                Orientation="Horizontal"
+                                Margin="0 4 0 0">
+                        <TextBlock Text="Size:" FontWeight="Bold" Width="90" />
+                        <TextBlock Text="{Binding SelectedApplication.DisplaySize}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="7"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                Margin="0 8 0 0">
+                        <Button x:Name="UninstallButton"
+                                Width="100"
+                                Margin="0 0 8 0"
+                                Content="Uninstall"
+                                Visibility="{Binding CanUninstall, Converter={StaticResource BoolToVisibilityConverter}}"
+                                Click="OnUninstallClick" />
+                        <Button x:Name="CancelButton"
+                                Width="80"
+                                Content="Cancel"
+                                Visibility="{Binding IsOperationInProgress, Converter={StaticResource BoolToVisibilityConverter}}"
+                                Click="OnCancelClick" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,88 @@
+<Application x:Class="ZeroTrace.App.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:ZeroTrace.App.Converters"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!-- Dark theme brushes -->
+        <SolidColorBrush x:Key="ZTWindowBackground" Color="#1E1E1E" />
+        <SolidColorBrush x:Key="ZTControlBackground" Color="#252526" />
+        <SolidColorBrush x:Key="ZTControlAltBackground" Color="#2D2D30" />
+        <SolidColorBrush x:Key="ZTBorderBrush" Color="#3F3F46" />
+        <SolidColorBrush x:Key="ZTForeground" Color="#F3F3F3" />
+        <SolidColorBrush x:Key="ZTSecondaryForeground" Color="#CCCCCC" />
+        <SolidColorBrush x:Key="ZTScrollBarBackground" Color="#2A2A2A" />
+        <SolidColorBrush x:Key="ZTScrollBarThumb" Color="#5A5A5A" />
+
+        <!-- Window -->
+        <Style TargetType="Window">
+            <Setter Property="Background" Value="{StaticResource ZTWindowBackground}" />
+            <Setter Property="Foreground" Value="{StaticResource ZTForeground}" />
+        </Style>
+
+        <!-- TextBlock -->
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource ZTForeground}" />
+        </Style>
+
+        <!-- TextBox -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#333333" />
+            <Setter Property="Foreground" Value="{StaticResource ZTForeground}" />
+            <Setter Property="BorderBrush" Value="{StaticResource ZTBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="4,2" />
+        </Style>
+
+        <!-- Button -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ZTControlAltBackground}" />
+            <Setter Property="Foreground" Value="{StaticResource ZTForeground}" />
+            <Setter Property="BorderBrush" Value="{StaticResource ZTBorderBrush}" />
+            <Setter Property="Padding" Value="6,2" />
+        </Style>
+
+        <!-- Border -->
+        <Style TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource ZTControlBackground}" />
+            <Setter Property="BorderBrush" Value="{StaticResource ZTBorderBrush}" />
+        </Style>
+
+        <!-- ListView -->
+        <Style TargetType="ListView">
+            <Setter Property="Background" Value="{StaticResource ZTControlBackground}" />
+            <Setter Property="Foreground" Value="{StaticResource ZTForeground}" />
+        </Style>
+
+        <!-- Default app icon -->
+        <BitmapImage x:Key="ZTDefaultAppIcon" UriSource="pack://application:,,,/Assets/zerotrace.ico" />
+
+        <!-- DataGrid -->
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="{StaticResource ZTControlBackground}" />
+            <Setter Property="Foreground" Value="{StaticResource ZTForeground}" />
+            <Setter Property="BorderBrush" Value="{StaticResource ZTBorderBrush}" />
+        </Style>
+
+        <!-- Expander -->
+        <Style TargetType="Expander">
+            <Setter Property="Foreground" Value="{StaticResource ZTForeground}" />
+            <Setter Property="Background" Value="{StaticResource ZTControlBackground}" />
+        </Style>
+
+        <!-- ScrollViewer -->
+        <Style TargetType="ScrollViewer">
+            <Setter Property="Background" Value="{StaticResource ZTControlBackground}" />
+        </Style>
+
+        <!-- ScrollBar -->
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="{StaticResource ZTScrollBarBackground}" />
+            <Setter Property="Foreground" Value="{StaticResource ZTScrollBarThumb}" />
+        </Style>
+
+        <!-- Converters -->
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <conv:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+    </Application.Resources>
+</Application>
